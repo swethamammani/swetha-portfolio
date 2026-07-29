@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swetha S Mammani — Product Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12203A;
+    --ink-soft:#1E3355;
+    --paper:#E9EEF1;
+    --white:#FFFFFF;
+    --amber:#E8A33D;
+    --teal:#2F7A6F;
+    --line:#D7DEE0;
+    --line-dark:#33486B;
+    --muted:#5A6B7A;
+    --muted-light:#AEB9D6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--white);
+    padding:64px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:0.18;
+    pointer-events:none;
+  }
+  .ticket{
+    position:relative;
+    background:var(--ink-soft);
+    border:1px solid var(--line-dark);
+    border-radius:6px;
+  }
+  .hero .ticket{padding:32px 32px 30px;}
+  .ticket-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    color:var(--muted-light);
+    margin-bottom:22px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .ticket-id{color:var(--amber);}
+  .status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:5px 11px;
+    border-radius:20px;
+    background:rgba(47,122,111,0.18);
+    color:#7FD6C4;
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .status-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#4FE3C4;
+    box-shadow:0 0 0 0 rgba(79,227,196,0.6);
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(79,227,196,0.55);}
+    70%{box-shadow:0 0 0 8px rgba(79,227,196,0);}
+    100%{box-shadow:0 0 0 0 rgba(79,227,196,0);}
+  }
+  .hero h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(34px,5.5vw,52px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero .role{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:500;
+    font-size:19px;
+    color:var(--amber);
+    margin-top:10px;
+  }
+  .hero p.tagline{
+    margin-top:16px;
+    max-width:560px;
+    color:#C7D0E0;
+    font-size:15.5px;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    margin-top:26px;
+    padding-top:22px;
+    border-top:1px solid var(--line-dark);
+    font-size:13px;
+    color:var(--muted-light);
+  }
+  .meta-row span b{color:var(--white);font-weight:600;}
+
+  /* ---------- SECTION LABELS ---------- */
+  section{padding:56px 0;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .section-head .num{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.08em;
+  }
+  .section-head h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:22px;
+    font-weight:600;
+  }
+  .section-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- SUMMARY ---------- */
+  .summary-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px 28px;
+    font-size:15.5px;
+    color:#2C3B52;
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:3px solid var(--teal);
+    border-radius:6px;
+    padding:24px 26px;
+    margin-bottom:18px;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .exp-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px -14px rgba(18,32,58,0.25);
+  }
+  .exp-card.current{border-left-color:var(--amber);}
+  .exp-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .exp-id{font-size:12px;color:var(--muted);}
+  .exp-status{
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:20px;
+    font-weight:600;
+  }
+  .exp-status.active{background:rgba(232,163,61,0.16);color:#B5761C;}
+  .exp-status.closed{background:rgba(47,122,111,0.14);color:var(--teal);}
+  .exp-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;
+    font-weight:600;
+    margin-top:10px;
+  }
+  .exp-company{color:var(--muted);font-size:14px;margin-top:2px;}
+  .exp-dates{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .exp-list{margin-top:14px;list-style:none;}
+  .exp-list li{
+    display:flex;
+    gap:10px;
+    font-size:14.5px;
+    color:#2C3B52;
+    margin-bottom:8px;
+  }
+  .exp-list li::before{
+    content:"✓";
+    color:var(--teal);
+    font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-group{margin-bottom:20px;}
+  .skill-group h3{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:10px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:5px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px 26px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .edu-card .degree{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;}
+  .edu-card .school{color:var(--muted);font-size:13.5px;margin-top:3px;}
+  .edu-card .yr{font-size:12.5px;color:var(--muted);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--muted-light);
+    padding:40px 0 32px;
+    margin-top:24px;
+  }
+  footer .ticket-id{margin-bottom:14px;display:block;}
+  footer .contact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    font-size:13.5px;
+  }
+  footer .contact-row a{color:var(--amber);text-decoration:none;}
+  footer .note{margin-top:20px;font-size:12px;color:#6B7A96;}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease, transform 0.5s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .status-dot{animation:none;}
+    .reveal{transition:none;opacity:1;transform:none;}
+  }
+
+  @media (max-width:600px){
+    .hero{padding:44px 0 64px;}
+    section{padding:40px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="ticket">
+      <div class="ticket-top">
+        <span class="ticket-id mono">OPS‑104 · PROFILE</span>
+        <span class="status-pill mono"><span class="status-dot"></span>Open to new roles</span>
+      </div>
+      <h1>Swetha S Mammani</h1>
+      <div class="role">Product Operations</div>
+      <p class="tagline">I sit between product, engineering, and business teams and keep the handoffs from breaking — turning messy workflows into SOPs, dashboards, and systems people actually use.</p>
+      <div class="meta-row mono">
+        <span>📍 <b>Bengaluru, India</b></span>
+        <span>🕐 <b>5+ yrs</b> in Product &amp; Data Ops</span>
+        <span>⚙ <b>Jira · Asana · Sheets · Python</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="reveal">
+    <div class="section-head"><span class="num mono">01</span><h2>Summary</h2></div>
+    <div class="summary-card">
+      Product Operations professional with a track record of connecting product, engineering, and business functions to keep execution moving. I've built SOPs and automated workflows that cut manual effort by 40–60% while holding data accuracy above 99%, and I'm most useful in the space where a process is undocumented, a handoff is unclear, or a team needs a system instead of a workaround.
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="section-head"><span class="num mono">02</span><h2>Experience</h2></div>
+
+    <div class="exp-card current">
+      <div class="exp-top">
+        <span class="exp-id mono">OPS‑103</span>
+        <span class="exp-status active mono">In progress</span>
+      </div>
+      <div class="exp-title">Product Operations Associate</div>
+      <div class="exp-company">Pebl (formerly Velocity Global)</div>
+      <div class="exp-dates mono">May 2026 — Present · Contract</div>
+      <ul class="exp-list">
+        <li>Support cross-regional product operations, coordinating between distributed teams to keep workflows consistent.</li>
+        <li>Build and maintain SOPs and tracking sheets in Google Sheets to standardize recurring operational processes.</li>
+        <li>Work across time zones to keep documentation and reporting aligned with team needs.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <span class="exp-id mono">OPS‑102</span>
+        <span class="exp-status closed mono">Closed</span>
+      </div>
+      <div class="exp-title">Data Operations Executive — Product Management</div>
+      <div class="exp-company">AnyMind Group</div>
+      <div class="exp-dates mono">May 2024 — Mar 2026</div>
+      <ul class="exp-list">
+        <li>Automated recurring workflows using Python, Google Apps Script, and Excel VBA, cutting manual effort by 40–60% while maintaining 99%+ data accuracy.</li>
+        <li>Managed data operations across HubSpot CRM and Shopify to support product and commercial teams.</li>
+        <li>Built Looker Studio dashboards to give stakeholders visibility into operational and product metrics.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <span class="exp-id mono">OPS‑101</span>
+        <span class="exp-status closed mono">Closed</span>
+      </div>
+      <div class="exp-title">Analyst — Data Operations</div>
+      <div class="exp-company">Nielsen</div>
+      <div class="exp-dates mono">Oct 2020 — May 2024</div>
+      <ul class="exp-list">
+        <li>Handled data operations processes over a multi-year tenure, building the operational foundation for later product-facing roles.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="section-head"><span class="num mono">03</span><h2>Skills</h2></div>
+
+    <div class="skill-group">
+      <h3 class="mono">Operations</h3>
+      <div class="tags">
+        <span class="tag">Product Operations</span>
+        <span class="tag">SOP Development</span>
+        <span class="tag">Cross-functional Coordination</span>
+        <span class="tag">Stakeholder Management</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3 class="mono">Tools</h3>
+      <div class="tags">
+        <span class="tag">Jira</span>
+        <span class="tag">Asana</span>
+        <span class="tag">Google Sheets</span>
+        <span class="tag">Google Apps Script</span>
+        <span class="tag">Excel VBA</span>
+        <span class="tag">HubSpot CRM</span>
+        <span class="tag">Shopify</span>
+        <span class="tag">Looker Studio</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3 class="mono">Analysis &amp; Automation</h3>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Workflow Automation</span>
+        <span class="tag">Dashboarding</span>
+        <span class="tag">AI &amp; Productivity Tools</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="section-head"><span class="num mono">04</span><h2>Education</h2></div>
+    <div class="edu-card">
+      <div>
+        <div class="degree">B.Tech, Computer Science</div>
+        <div class="school">Dayananda Sagar University, Bengaluru</div>
+      </div>
+      <div class="yr mono">Graduated</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="ticket-id mono">OPS‑105 · CONTACT</span>
+    <div class="contact-row mono">
+      <a href="mailto:your.email@example.com">your.email@example.com</a>
+      <a href="#">LinkedIn ↗</a>
+      <span>Bengaluru, India</span>
+    </div>
+    <div class="note">Add your email and LinkedIn URL in the contact links above before sharing.</div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
